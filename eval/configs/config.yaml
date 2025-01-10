@@ -11,9 +11,12 @@ metrics:    # 유형: "exact_match", "f1", "bleu", "rouge"
     - bleu
     - rouge
 # 모델, 데이터 경로
-model_name: meta-llama/Llama-3.1-8B
-model_dir: ""
-data_dir: ""
+model_path: meta-llama/Llama-3.1-8B
+data_paths:
+    hellaswag: ""
+    boolq: ""
+    squad: ""
+    mmlu: ""
 log_root_dir: ./logs
 
 # 필요 변수들
