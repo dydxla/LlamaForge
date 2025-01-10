@@ -23,7 +23,7 @@ echo "Tokenizer Path: $TOKENIZER_PATH"
 echo "Benchmarks: $BENCHMARKS"
 
 # Python 스크립트 실행
-python run.py \
+python run_eval.py \
     --model_path "$MODEL_PATH" \
     --tokenizer_path "$TOKENIZER_PATH" \
     --benchmarks "$BENCHMARKS"
