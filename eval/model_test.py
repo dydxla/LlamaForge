@@ -8,7 +8,6 @@ def eval_model(model_path: str = None, tokenizer_path: str = None, benchmarks: L
     model = load_model(model_path)
     tokenizer = load_tokenizer(tokenizer_path)
     benchmarks_list = benchmarks if benchmarks[0] else config['benchmarks']
-    print(benchmarks_list)
     evaluator = BenchmarkEvaluator(model, tokenizer)
     results = evaluator.run_benchmarks(benchmarks_list)
     # ***** run metric code ******
