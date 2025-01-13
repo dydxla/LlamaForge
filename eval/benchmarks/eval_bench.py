@@ -1,6 +1,7 @@
 from typing import List, Dict
 from .func import eval_boolq
 from configs import config
+import traceback
 
 class BenchmarkEvaluator:
     def __init__(self, model, tokenizer):
@@ -53,4 +54,5 @@ class BenchmarkEvaluator:
                     raise AttributeError(f"No evaluation method for benchmark '{benchmark}'")
             except Exception as e:
                 print(f"Error: {e}")
+                # print(traceback.format_exc())
         return results

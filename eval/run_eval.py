@@ -1,5 +1,5 @@
 import argparse
-from evaluate import eval_model
+from model_test import eval_model
 
 def main():
     # ArgumentParser 설정
@@ -26,21 +26,21 @@ def main():
     # 파싱된 인자 가져오기
     args = parser.parse_args()
     
-    # # eval_model 함수 호출
-    # print("Running evaluation...")
-    # results = eval_model(
-    #     model_path=args.model_path,
-    #     tokenizer_path=args.tokenizer_path,
-    #     benchmarks=args.benchmarks
-    # )
+    # eval_model 함수 호출
+    print("Running evaluation...")
+    results = eval_model(
+        model_path=args.model_path,
+        tokenizer_path=args.tokenizer_path,
+        benchmarks=args.benchmarks
+    )
     
-    # # 결과 출력
-    # print("\nEvaluation Results:")
-    # for benchmark, result in results.items():
-    #     print(f"{benchmark}: {result}")
-    print("model_path : ", args.model_path)
-    print("tokenizer_path : ", args.tokenizer_path)
-    print("benchmarks : ", args.benchmarks)
+    # 결과 출력
+    print("\nEvaluation Results:")
+    for benchmark, result in results.items():
+        print(f"{benchmark}: {result}")
+    # print("model_path : ", args.model_path)
+    # print("tokenizer_path : ", args.tokenizer_path)
+    # print("benchmarks : ", args.benchmarks)
 
 if __name__ == "__main__":
     main()

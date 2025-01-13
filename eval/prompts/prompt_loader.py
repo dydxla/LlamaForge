@@ -1,5 +1,5 @@
 from typing import List, Dict
-from templates import \
+from .templates import \
     (get_boolq_templates)
 
 class PromptManager:

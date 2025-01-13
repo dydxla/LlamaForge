@@ -4,12 +4,13 @@ from datasets import load_dataset
 from evaluate import load as load_metric
 import torch
 from typing import List
-from eval.prompts import PromptManager
-from eval.prompts.templates import get_boolq_answer
-from eval.configs import config
+from prompts import PromptManager
+from prompts.templates import get_boolq_answer
+from configs import config
 
 def is_correct(gentext: str):
-    ans_text = get_boolq_answer
+    prompt_type = config['prompt_type']['boolq']
+    ans_text = get_boolq_answer(prompt_type=prompt_type)
     if ans_text in gentext:
         prediction_str = gentext.split(ans_text)[-1].strip()
     else:
@@ -71,7 +72,7 @@ def eval_boolq(model, tokenizer, data_path=None, batch_size=4, device="cuda", sp
 
     # 모델 평가
     model.eval()
-    model.to(device)
+    # model.to(device)
     tokenizer.pad_token = tokenizer.eos_token
     
     predictions = []
@@ -88,8 +89,8 @@ def eval_boolq(model, tokenizer, data_path=None, batch_size=4, device="cuda", sp
         prompt = [prompt_manager.get_prompt(
             benchmark="boolq",
             prompt_type=config['prompt_type']['boolq'],
-            passage=contexts,
-            question=questions)
+            passage=context,
+            question=question) for context, question in zip(contexts, questions)
             ]
 
         # 입력 토큰화
