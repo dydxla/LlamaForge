@@ -22,6 +22,7 @@ log_root_dir: ./logs
 # 필요 변수들
 prompt_type:
     boolq: simple
+    squad: basic
 
 # 실행 옵션
 device: cuda      # 실행 장치 ("cuda", "cpu")

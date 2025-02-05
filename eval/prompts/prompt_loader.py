@@ -1,12 +1,14 @@
 from typing import List, Dict
 from .templates import \
-    (get_boolq_templates)
+    (get_boolq_templates,
+     get_squad_templates)
 
 class PromptManager:
     def __init__(self):
         # prompt templates
         self.templates = {
             'boolq': get_boolq_templates(),
+            'squad': get_squad_templates(),
             }
 
     def list_benchmarks(self,) -> List[str]:

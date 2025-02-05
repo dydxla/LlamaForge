@@ -1,5 +1,7 @@
 from typing import List, Dict
-from .func import eval_boolq
+from .func import \
+    (eval_boolq,
+     eval_squad)
 from configs import config
 import traceback
 
@@ -9,8 +11,9 @@ class BenchmarkEvaluator:
         self.tokenizer = tokenizer
         # self.eval_hellaswag = eval_hellaswag
         self.eval_boolq = eval_boolq
-        # self.eval_squad = eval_squad
+        self.eval_squad = eval_squad
         # self.eval_mmlu = eval_mmlu
+        # self.eval_aime = eval_aime
         self.config = config
         self.batch_size = self.config['batch_size']
         self.device = self.config['device']

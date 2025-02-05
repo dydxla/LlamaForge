@@ -1,1 +1,1 @@
-from .boolq import eval_boolq
+from .boolq import eval_boolq, eval_squad

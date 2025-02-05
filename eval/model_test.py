@@ -5,6 +5,8 @@ from models import load_model, load_tokenizer
 
 def eval_model(model_path: str = None, tokenizer_path: str = None, benchmarks: List = None):
     # load model
+    if not tokenizer_path:
+        tokenizer_path = model_path
     model = load_model(model_path)
     tokenizer = load_tokenizer(tokenizer_path)
     benchmarks_list = benchmarks if benchmarks[0] else config['benchmarks']
