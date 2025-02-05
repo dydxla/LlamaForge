@@ -1,0 +1,30 @@
+# 평가하고자 하는 벤치마크
+benchmarks:
+    - hellaswag
+    - boolq
+    - squad
+    - mmlu
+# 평가 지표 설정
+metrics:    # 유형: "exact_match", "f1", "bleu", "rouge"
+    - exact_match
+    - f1
+    - bleu
+    - rouge
+# 모델, 데이터 경로
+model_path: meta-llama/Llama-3.1-8B
+data_paths:
+    hellaswag: ""
+    boolq: ""
+    squad: ""
+    mmlu: ""
+log_root_dir: ./logs
+
+# 필요 변수들
+prompt_type:
+    boolq: simple
+    squad: basic
+
+# 실행 옵션
+device: cuda      # 실행 장치 ("cuda", "cpu")
+max_new_tokens: 100     # 모델 출력의 최대 길이
+batch_size: 4       # 배치 크기
