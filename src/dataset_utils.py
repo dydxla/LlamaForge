@@ -31,24 +31,35 @@ def load_hf_dataset(dataset_name):
     return train_dataset, test_dataset
 
 def dataset_files_is_exist(dataset_path):
+    """
+    Method to check whether the dataset path exists.
+
+    Args:
+        dataset_path (str): dataset directory.
+        
+    Returns:
+        bool: exist or not
+    """
     if not os.path.exists(dataset_path):
         print(f"{dataset_path} does not exist. Creating default dataset.")
         return False
     else: return True
 
-def load_and_template_datasets(tokenizer, train_path, test_path):
-    if dataset_files_is_exist(train_path):
-        train_dataset = load_dataset(
-            "json", 
-            data_files=train_path, 
-            split="train"
-        )
-        if dataset_files_is_exist(test_path):
-            test_dataset = load_dataset(
+def load_and_template_datasets(tokenizer, data_path):
+    if dataset_files_is_exist(data_path):
+        
+        if os.path.splitext(train_path) == '.json':
+            train_dataset = load_dataset(
                 "json", 
-                data_files=test_path, 
+                data_files=train_path, 
                 split="train"
             )
+            if dataset_files_is_exist(test_path):
+                test_dataset = load_dataset(
+                    "json", 
+                    data_files=test_path, 
+                    split="train"
+                )
     else:
         train_dataset, test_dataset = load_hf_dataset("beomi/KoAlpaca-v1.1a")
     

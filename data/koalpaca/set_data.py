@@ -28,5 +28,5 @@ train_dataset = train_test_split["train"]
 test_dataset = train_test_split["test"]
 
 # Save to JSON files
-train_dataset.to_json("train_dataset.json", orient="records", force_ascii=False)
-test_dataset.to_json("test_dataset.json", orient="records", force_ascii=False)
+train_dataset.to_json("./train/train_dataset.json", orient="records", force_ascii=False)
+test_dataset.to_json("./test/test_dataset.json", orient="records", force_ascii=False)
