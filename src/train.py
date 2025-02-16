@@ -65,6 +65,8 @@ def main():
     )
 
     # 3. Training set
+    OUTPUT_DIR = "./kor-deepseek-r1-distill-llama-8b"
+    DEEPSPEED_CONFIG = "./ds_config.json"
     training_args = create_training_args(OUTPUT_DIR, DEEPSPEED_CONFIG)
     trainer = create_trainer(model, tokenizer, train_dataset, test_dataset, training_args)
 

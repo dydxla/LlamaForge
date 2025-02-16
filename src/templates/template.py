@@ -45,5 +45,15 @@ TEMPLATES = {
         "{% elif add_generation_prompt %}"
             "{{ 'Response: ' }}"
         "{% endif %}"
+    ),
+    "normal": (
+        "{% if instruction %}"
+            "{{ 'Instruction: ' + instruction + '\\n\\n' }}"
+        "{% endif %}"
+        "{% if output %}"
+            "{{ 'Response: ' + output + eos_token }}"
+        "{% elif add_generation_prompt %}"
+            "{{ 'Response: ' }}"
+        "{% endif %}"
     )
 }
