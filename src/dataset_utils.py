@@ -131,6 +131,9 @@ def load_and_template_datasets(tokenizer, data_path):
         for dataset_file in dataset_file_list:
             dataset = load_cache_dataset(dataset_file)
             train_dataset, test_dataset = dataset_processing(dataset)
+            train_datasets.append(train_dataset)
+            test_datasets.append(test_dataset)
+            
 
     else:
         train_dataset, test_dataset = load_hf_dataset("beomi/KoAlpaca-v1.1a")
