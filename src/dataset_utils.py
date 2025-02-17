@@ -1,5 +1,5 @@
 import os, glob
-from datasets import load_dataset
+from datasets import load_dataset, concatenate_datasets
 
 
 def dataset_train_test_split(dataset):
@@ -131,7 +131,15 @@ def load_and_template_datasets(tokenizer, data_path):
         for dataset_file in dataset_file_list:
             dataset = load_cache_dataset(dataset_file)
             train_dataset, test_dataset = dataset_processing(dataset)
-
+            train_datasets.append(train_dataset)
+            test_datasets.append(test_dataset)
+        
+        try:
+            train_dataset = concatenate_datasets(train_datasets)
+            test_dataset = concatenate_datasets(test_datasets)
+        except Exception as e:
+            print(e)
+            print(r"Please check train/test datasets schema.")
     else:
         train_dataset, test_dataset = load_hf_dataset("beomi/KoAlpaca-v1.1a")
     
