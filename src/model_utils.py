@@ -6,7 +6,7 @@ from peft import LoraConfig, get_peft_model
 def load_model(model_name):
     model = AutoModelForCausalLM.from_pretrained(
         model_name,
-        torch_dtype="auto"
+        torch_dtype=torch.float16,
     )
     return model
 
