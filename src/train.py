@@ -42,13 +42,21 @@ def main():
         default="koalpaca",
         help="Dataset folder path." 
     )
+
+    # 모델 출력 폴더 경로
+    parser.add_argument(
+        "-o", "--output_dir",
+        type=str,
+        default="./output/default",
+        help="model training output directory."
+    )
     
     # 파싱된 인자 가져오기
     args = parser.parse_args()
 
     print("Runing model training...")
 
-    model_path, template_type, data_dir = args.model_path, args.template, args.data_dir
+    model_path, template_type, data_dir, output_dir = args.model_path, args.template, args.data_dir, args.output_dir
 
     # 1. Prepare
     tokenizer = prepare_tokenizer(model_path, template_type)    # 토크나이저 세팅
@@ -65,7 +73,7 @@ def main():
     )
 
     # 3. Training set
-    OUTPUT_DIR = "./kor-deepseek-r1-distill-llama-8b"
+    OUTPUT_DIR = output_dir
     DEEPSPEED_CONFIG = "./ds_config.json"
     training_args = create_training_args(OUTPUT_DIR, DEEPSPEED_CONFIG)
     trainer = create_trainer(model, tokenizer, train_dataset, test_dataset, training_args)
