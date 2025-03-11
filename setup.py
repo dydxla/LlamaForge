@@ -50,8 +50,8 @@ setup(
     long_description_content_type="text/markdown",
     url=URL,
     license=LICENSE,
-    # packages=find_packages(where="src"),  # Assuming your package code is in "src/"
-    # package_dir={"": "src"},              # Define package root directory
+    packages=find_packages(where="src"),  # Assuming your package code is in "src/"
+    package_dir={"": "src"},              # Define package root directory
     python_requires=PYTHON_REQUIRES,
     install_requires=get_requires(),
     extras_require=EXTRAS_REQUIRE,
