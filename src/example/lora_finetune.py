@@ -1,4 +1,19 @@
-_train_args = {
+from llamaforge.finetune import FinetuneTrainer
+
+## default param.
+# model_name: str = "meta-llama/Llama-3.1-8B-Instruct",
+# method: str = "lora",
+# dataset_dir: str = "./datasets",
+# output_dir: str = "./output",
+# deepspeed_config: str = "../../configs/deepspeed/ds_config.json"
+# per_device_train_batch_size = 2,
+# gradient_accumulation_steps = 2,
+# learning_rate = 2e-4,
+# num_train_epochs = 3,
+# logging_steps = 10,
+# max_seq_length = 256
+
+_conf = {
     "output_dir": "./output",
     "overwrite_output_dir": True,
     "per_device_train_batch_size": 2,
@@ -20,14 +35,14 @@ _train_args = {
     "max_steps": -1,
     "warmup_ratio": 0.03,
     "group_by_length": True,
-    "lr_scheduler_type": "cosine"
-}
-
-_train_conf = {
+    "lr_scheduler_type": "cosine",
     "max_seq_length": 256,
     "packing": False,
     "dataset_text_field": "text",
-    "dataset_kwargs": {"add_special_tokens": True, "append_concat_token": False}
+    "dataset_kwargs": {
+        "add_special_tokens": True, 
+        "append_concat_token": False
+    }
 }
 
 _lora_conf = {
@@ -37,3 +52,6 @@ _lora_conf = {
     "bias": "none",
     "task_type": "CAUSAL_LM"
 }
+
+
+trainer = FinetuneTrainer()

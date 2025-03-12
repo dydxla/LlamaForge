@@ -6,14 +6,16 @@ def get_peft_config(
         lora_alpha: int = 32,
         lora_dropout: float = 0.1,
         bias: str = "none",
-        task_type: str = "CAUSAL_LM"
+        task_type: str = "CAUSAL_LM",
+        **kwargs
 ):
     return LoraConfig(
         r=r, 
         lora_alpha=lora_alpha, 
         lora_dropout=lora_dropout, 
         bias=bias,
-        task_type=task_type
+        task_type=task_type,
+        **kwargs
     )
 
 
