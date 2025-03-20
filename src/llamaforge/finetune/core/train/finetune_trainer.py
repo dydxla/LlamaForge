@@ -109,7 +109,7 @@ class FinetuneTrainer(BaseTrainer):
                 elif k in lora_args_keys and k not in lora_args:
                     lora_args.update({k:v})
                 else:
-                    raise KeyError(f"Config '{key}' is invalid param.")
+                    raise KeyError(f"Config '{k}' is invalid param.")
 
         # config 정의
         peft_config = get_peft_config(**lora_args) if method=="lora" else None
