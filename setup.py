@@ -31,8 +31,27 @@ EXTRAS_REQUIRE = {
 
 # Dependencies from requirements.txt
 def get_requires():
+    import sys
     with open("requirements.txt", encoding="utf-8") as f:
-        return [line.strip() for line in f if not line.startswith("#")]
+        requirements = []
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            # Skip deepspeed on Windows
+            if "deepspeed" in line and sys.platform == "win32":
+                continue
+            # Handle platform-specific requirements
+            if "sys_platform" in line:
+                if "win32" in line and sys.platform == "win32":
+                    requirements.append(line.split(";")[0].strip())
+                elif "darwin" in line and sys.platform == "darwin":
+                    requirements.append(line.split(";")[0].strip())
+                elif "linux" in line and sys.platform == "linux":
+                    requirements.append(line.split(";")[0].strip())
+            else:
+                requirements.append(line)
+        return requirements
 
 # Long Description
 def get_long_description():
