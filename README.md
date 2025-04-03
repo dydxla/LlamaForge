@@ -115,11 +115,30 @@ trainer.run_finetune()
 [
     {
         "instruction": "질문 또는 지시사항",
-        "input": "입력 텍스트 (선택사항)",
         "output": "응답 또는 출력"
     },
     ...
 ]
+```
+
+데이터셋은 내부적으로 다음과 같은 OpenAI 메시지 형식으로 변환됩니다:
+```json
+{
+    "messages": [
+        {
+            "role": "system",
+            "content": "You are the AI assistant created to be helpful and honest. Your knowledge spans a wide range of topics, allowing you to engage in substantive conversations and provide analysis on complex subjects."
+        },
+        {
+            "role": "user",
+            "content": "질문 또는 지시사항"
+        },
+        {
+            "role": "assistant",
+            "content": "응답 또는 출력"
+        }
+    ]
+}
 ```
 
 ## 🤝 기여하기
