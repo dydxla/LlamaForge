@@ -1,7 +1,8 @@
-import torch, platform, inspect
+import torch, platform, inspect, os
 from transformers import TrainingArguments
 from trl import SFTTrainer
 from peft import LoraConfig
+import huggingface_hub
 from llamaforge.finetune.configs import _train_args, _train_conf, _lora_conf
 from llamaforge.finetune.core.train.base_trainer import BaseTrainer
 from llamaforge.finetune.core.models import load_model
@@ -18,11 +19,18 @@ class FinetuneTrainer(BaseTrainer):
             model_dtype = torch.float16, 
             template_type: str = "chatbot",
             initial_configs = None,
-            initial_lora_configs = None
+            initial_lora_configs = None,
+            hf_token: str = None
     ):
         super().__init__(initial_configs, initial_lora_configs)
         self.model_name = model_name
         self.dataset_path = dataset_path
+
+        # Set Hugging Face token if provided
+        if hf_token:
+            huggingface_hub.login(token=hf_token)
+        elif "HUGGING_FACE_HUB_TOKEN" in os.environ:
+            huggingface_hub.login(token=os.environ["HUGGING_FACE_HUB_TOKEN"])
 
         # Load model and tokenizer
         self.model = load_model(model_name, torch_dtype=model_dtype)
