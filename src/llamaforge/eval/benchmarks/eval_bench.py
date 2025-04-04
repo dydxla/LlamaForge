@@ -1,6 +1,7 @@
 from typing import List, Dict, Tuple, Union
 from llamaforge.eval.benchmarks.func import eval_boolq, eval_squad
 from llamaforge.eval.configs import config
+from llamaforge.eval.models import load_model, load_tokenizer
 import traceback
 import logging
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -27,9 +28,9 @@ class BenchmarkEvaluator:
         
         # 모델과 토크나이저 로드
         logger.info(f"Loading model from {self.model_path}")
-        self.model = AutoModelForCausalLM.from_pretrained(self.model_path)
+        self.model = load_model(self.model_path)
         logger.info(f"Loading tokenizer from {self.tokenizer_path}")
-        self.tokenizer = AutoTokenizer.from_pretrained(self.tokenizer_path)
+        self.tokenizer = load_tokenizer(self.tokenizer_path)
         
         # 평가 함수 설정
         self.eval_boolq = eval_boolq
