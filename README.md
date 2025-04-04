@@ -14,6 +14,7 @@ LlamaForge는 대규모 언어 모델(LLM)을 쉽게 파인튜닝할 수 있도�
 
 - 🚀 간단한 API로 다양한 LLM 모델 파인튜닝 (Llama, DeepSeek, Grok 등)
 - 🔧 LoRA를 통한 효율적인 파인튜닝 지원
+- 📊 BoolQ, SQuAD 등 표준 벤치마크를 통한 모델 성능 평가
 - 🌐 Windows, Linux, Mac 환경 지원
 - 🛠️ 커스터마이즈 가능한 학습 설정
 - 📊 기본 제공되는 데이터셋 템플릿
@@ -105,6 +106,49 @@ trainer = FinetuneTrainer(
 
 # 파인튜닝 시작
 trainer.run_finetune()
+```
+
+### 모델 성능 평가
+
+```python
+from llamaforge.eval.benchmarks import BenchmarkEvaluator
+
+# 기본 설정으로 평가기 생성
+evaluator = BenchmarkEvaluator(
+    model_path="path/to/your/model",      # 평가할 모델 경로
+    tokenizer_path="path/to/tokenizer"    # 토크나이저 경로 (선택사항)
+)
+
+# 단일 벤치마크 실행 (BoolQ)
+boolq_result = evaluator.run_benchmarks("boolq")
+print(f"BoolQ Accuracy: {boolq_result['boolq']:.2f}%")
+
+# 여러 벤치마크 실행 (BoolQ + SQuAD)
+results = evaluator.run_benchmarks(["boolq", "squad"])
+print(f"BoolQ Accuracy: {results['boolq']:.2f}%")
+em, f1 = results['squad']
+print(f"SQuAD - Exact Match: {em:.2f}%, F1 Score: {f1:.2f}%")
+
+# 모든 벤치마크 실행
+all_results = evaluator.run_benchmarks()
+```
+
+평가 설정은 `src/llamaforge/eval/configs/config.yaml`에서 커스터마이즈할 수 있습니다:
+```yaml
+# 평가하고자 하는 벤치마크
+benchmarks:
+    - boolq
+    - squad
+
+# 평가 지표 설정
+metrics:
+    - exact_match
+    - f1
+
+# 실행 옵션
+device: cuda      # 실행 장치 ("cuda", "cpu")
+max_new_tokens: 100     # 모델 출력의 최대 길이
+batch_size: 4       # 배치 크기
 ```
 
 ## 📚 데이터셋 형식
