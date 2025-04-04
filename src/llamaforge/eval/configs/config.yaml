@@ -1,0 +1,28 @@
+# 평가하고자 하는 벤치마크
+benchmarks:
+    - boolq
+    - squad
+
+# 평가 지표 설정
+metrics:
+    - exact_match
+    - f1
+
+# 모델, 데이터 경로
+model_path: meta-llama/Llama-3.1-8B
+data_paths:
+    boolq: ""
+    squad: ""
+
+# 로그 설정
+log_root_dir: ./logs
+
+# 프롬프트 설정
+prompt_type:
+    boolq: simple
+    squad: basic
+
+# 실행 옵션
+device: cuda      # 실행 장치 ("cuda", "cpu")
+max_new_tokens: 100     # 모델 출력의 최대 길이
+batch_size: 4       # 배치 크기
